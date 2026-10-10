@@ -1,0 +1,921 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dekwah Homestay - Ubud, Bali</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        sage: {
+                            DEFAULT: '#87A96B',
+                            dark: '#6F8F54',
+                            light: '#F2F6ED',
+                        },
+                        warmgray: {
+                            DEFAULT: '#F9F8F6',
+                            dark: '#E5E3DF',
+                            text: '#4A4A4A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Plus Jakarta Sans', sans-serif; }
+    </style>
+</head>
+<body class="bg-warmgray text-warmgray-text antialiased">
+
+    <!-- Header / Navbar with Glassmorphism matching Footer color (#111827 / gray-900) -->
+    <header class="fixed top-0 left-0 right-0 z-50 bg-gray-900/80 backdrop-blur-md border-b border-gray-800 shadow-lg transition-all duration-300">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <a href="#home" class="text-2xl font-bold tracking-tight text-white flex items-center gap-2">
+                <i class="fa-solid fa-house-chimney text-sage"></i> Dekwah <span class="text-sage font-light">Homestay</span>
+            </a>
+            <nav class="hidden md:flex items-center space-x-8 font-medium text-sm text-gray-200">
+                <a href="#about" class="hover:text-sage transition" data-translate="nav_about">About Us</a>
+                <a href="#rooms" class="hover:text-sage transition" data-translate="nav_rooms">Kamar</a>
+                <a href="#facilities" class="hover:text-sage transition" data-translate="nav_facilities">Fasilitas</a>
+                <a href="#reviews" class="hover:text-sage transition" data-translate="nav_reviews">Rating</a>
+                <a href="#gallery" class="hover:text-sage transition" data-translate="nav_gallery">Galeri</a>
+            </nav>
+            <div class="hidden md:flex items-center gap-4">
+                <!-- Language Switcher -->
+                <div class="bg-gray-800/80 border border-gray-700 rounded-full p-1 flex items-center text-xs font-semibold text-white">
+                    <button onclick="switchLang('en')" id="btn-en" class="px-3 py-1.5 rounded-full bg-sage text-white transition">EN</button>
+                    <button onclick="switchLang('id')" id="btn-id" class="px-3 py-1.5 rounded-full text-gray-400 hover:text-white transition">ID</button>
+                </div>
+                <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="bg-sage hover:bg-sage-dark text-white px-5 py-2.5 rounded-full font-medium text-sm shadow-md transition transform hover:-translate-y-0.5" data-translate="btn_book">
+                    Pesan Sekarang
+                </a>
+            </div>
+            <!-- Mobile Menu Button -->
+            <button id="menu-btn" class="md:hidden text-white focus:outline-none text-xl">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-gray-900/95 backdrop-blur-md border-t border-gray-800 px-4 pt-2 pb-6 space-y-3 shadow-lg text-white">
+            <a href="#about" class="block py-2 hover:text-sage font-medium" data-translate="nav_about">About Us</a>
+            <a href="#rooms" class="block py-2 hover:text-sage font-medium" data-translate="nav_rooms">Kamar</a>
+            <a href="#facilities" class="block py-2 hover:text-sage font-medium" data-translate="nav_facilities">Fasilitas</a>
+            <a href="#reviews" class="block py-2 hover:text-sage font-medium" data-translate="nav_reviews">Rating</a>
+            <a href="#gallery" class="block py-2 hover:text-sage font-medium" data-translate="nav_gallery">Galeri</a>
+            <div class="flex items-center justify-between pt-2 border-t border-gray-800">
+                <span class="text-xs text-gray-400">Language:</span>
+                <div class="bg-gray-800 rounded-full p-1 flex items-center text-xs font-semibold">
+                    <button onclick="switchLang('en')" id="m-btn-en" class="px-3 py-1 rounded-full bg-sage text-white">EN</button>
+                    <button onclick="switchLang('id')" id="m-btn-id" class="px-3 py-1 rounded-full text-gray-400">ID</button>
+                </div>
+            </div>
+            <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="block text-center bg-sage text-white py-2.5 rounded-full font-medium mt-2" data-translate="btn_book">Pesan Sekarang</a>
+        </div>
+    </header>
+
+    <!-- Hero Section with Auto Slider (3 seconds) -->
+    <section id="home" class="relative h-screen flex items-center justify-center overflow-hidden pt-20">
+        <!-- Slider Images -->
+        <div class="absolute inset-0 z-0">
+            <div class="hero-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
+                <img src="asset/hero1.webp" alt="Dekwah Homestay Ubud 1" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+            <div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <img src="asset/hero2.webp" alt="Dekwah Homestay Ubud 2" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+            <div class="hero-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
+                <img src="asset/hero3.webp" alt="Dekwah Homestay Ubud 3" class="w-full h-full object-cover">
+                <div class="absolute inset-0 bg-black/40"></div>
+            </div>
+        </div>
+
+        <!-- Hero Content -->
+        <div class="relative z-10 text-center max-w-4xl mx-auto px-4 text-white">
+            <span class="bg-sage/80 backdrop-blur-sm text-white text-xs sm:text-sm font-semibold px-4 py-1.5 rounded-full uppercase tracking-wider mb-4 inline-block" data-translate="hero_badge">
+                Ubud, Bali 
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-bold tracking-tight mb-6" data-translate="hero_title">
+                Selamat Datang di Dekwah Homestay
+            </h1>
+            <p class="text-lg sm:text-xl font-light mb-8 text-gray-200 max-w-2xl mx-auto" data-translate="hero_desc">
+                Rasakan pengalaman menginap yang tenang di jantung Ubud dengan sarapan buatan rumah yang lezat dan keramahan pemilik khas Bali.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="bg-sage hover:bg-sage-dark text-white px-8 py-3.5 rounded-full font-semibold shadow-lg transition transform hover:-translate-y-1" data-translate="hero_cta1">
+                    Cek Ketersediaan & Pesan
+                </a>
+            </div>
+        </div>
+
+        <!-- Slider Indicators -->
+        <div class="absolute bottom-8 left-0 right-0 z-10 flex justify-center space-x-2">
+            <button class="slider-dot w-3 h-3 rounded-full bg-white/50 transition" onclick="currentSlide(0)"></button>
+            <button class="slider-dot w-3 h-3 rounded-full bg-white/50 transition" onclick="currentSlide(1)"></button>
+            <button class="slider-dot w-3 h-3 rounded-full bg-white/50 transition" onclick="currentSlide(2)"></button>
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section id="about" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-sage font-semibold uppercase tracking-wider text-sm" data-translate="about_subtitle">Tentang Dekwah Homestay</span>
+                    <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-6" data-translate="about_title">Ketenangan dan Kehangatan Rumah di Jantung Ubud</h2>
+                    <p class="text-gray-600 leading-relaxed mb-4" data-translate="about_desc1">
+                        Terletak strategis di No 18 Banjar Taman Kelod, Jl. Sri Wedari, Ubud, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571, **Dekwah Homestay** menawarkan akomodasi yang tenang namun sangat dekat dengan pusat kebudayaan dan seni Ubud. Tempat ini sangat ideal bagi pelancong yang mencari kedamaian namun tetap ingin mengeksplorasi keindahan Bali.
+                    </p>
+                    <p class="text-gray-600 leading-relaxed mb-6" data-translate="about_desc2">
+                        Kami dikenal berkat keramahan pemilik yang luar biasa, suasana homestay yang bersih, serta sajian sarapan rumahan yang lezat—terutama pancake buatan sendiri yang selalu dipuji oleh para tamu kami. Setiap kamar dirancang untuk memberikan kenyamanan maksimal dengan fasilitas kamar mandi pribadi, shower berukuran besar, dan kasur empuk berkualitas tinggi untuk menjamin istirahat Anda setelah seharian berkeliling Ubud.
+                    </p>
+                    
+                    <div class="border-t border-gray-100 pt-6 mt-6">
+                        <h3 class="text-lg font-bold text-gray-900 mb-4" data-translate="about_platforms_title">Cari & Pesan Kami di Platform Pilihan Anda:</h3>
+                        <div class="flex flex-wrap gap-3">
+                            <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="flex items-center gap-2 bg-blue-50 text-blue-700 px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-blue-100 transition border border-blue-200">
+                                <i class="fa-solid fa-globe"></i> Booking.com
+                            </a>
+                            <a href="https://www.agoda.com/dekwah-homestay/hotel/all/bali-id.html?countryId=192&finalPriceView=1&isShowMobileAppPrice=false&cid=1917614&numberOfBedrooms=&familyMode=false&adults=2&children=0&rooms=1&maxRooms=0&checkIn=2026-10-5&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=1&showReviewSubmissionEntry=false&currencyCode=IDR&isFreeOccSearch=false&los=1&searchrequestid=1a5dff26-5e7c-4d81-8fa6-ba1cf4de602b&ds=EA6i02QOS1Ml1v5W" target="_blank" class="flex items-center gap-2 bg-red-50 text-red-700 px-4 py-2.5 rounded-xl font-semibold text-sm hover:bg-red-100 transition border border-red-200">
+                                <i class="fa-solid fa-hotel"></i> Agoda
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4">
+                    <img src="asset/hero2.webp" alt="Homestay Interior" class="rounded-2xl shadow-md w-full h-64 object-cover">
+                    <img src="asset/hero1.webp" alt="Homestay Room" class="rounded-2xl shadow-md w-full h-64 object-cover mt-8">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Room Section -->
+    <section id="rooms" class="py-24 bg-warmgray">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-sage font-semibold uppercase tracking-wider text-sm" data-translate="room_subtitle">Akomodasi Nyaman</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4" data-translate="room_title">Pilihan Kamar Kami</h2>
+                <p class="text-gray-600" data-translate="room_desc">Semua kamar di Dekwah Homestay dirancang seragam dengan standar kenyamanan tinggi untuk memastikan istirahat Anda sempurna.</p>
+            </div>
+
+            <div class="max-w-xl mx-auto bg-white rounded-3xl shadow-md overflow-hidden border border-gray-100 hover:shadow-xl transition duration-300">
+                <div class="relative h-72">
+                    <img src="asset/hero1.webp" alt="Double Room" class="w-full h-full object-cover">
+                    <span class="absolute top-4 right-4 bg-sage text-white text-xs font-bold px-3 py-1.5 rounded-full" data-translate="room_badge">Free Breakfast</span>
+                </div>
+                <div class="p-8">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-2xl font-bold text-gray-900" data-translate="room_name">Double Room with Private Bathroom</h3>
+                    </div>
+                    <p class="text-gray-600 text-sm mb-6" data-translate="room_detail">
+                        Kamar luas dengan 1 tempat tidur double yang nyaman, dilengkapi kamar mandi pribadi dengan shower besar, koneksi Wi-Fi gratis, dan sudah termasuk sarapan rumahan setiap pagi.
+                    </p>
+                    <div class="flex items-center gap-4 text-sm text-gray-500 mb-6 pb-6 border-b border-gray-100">
+                        <span><i class="fa-solid fa-bed text-sage mr-2"></i> <span data-translate="room_spec1">1 Double Bed</span></span>
+                        <span><i class="fa-solid fa-bath text-sage mr-2"></i> <span data-translate="room_spec2">Private Bathroom</span></span>
+                        <span><i class="fa-solid fa-wifi text-sage mr-2"></i> <span data-translate="room_spec3">Free Wi-Fi</span></span>
+                    </div>
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <span class="text-xs text-gray-400 block" data-translate="room_price_label">Mulai dari</span>
+                            <span class="text-2xl font-bold text-gray-900">Rp 155.944 <span class="text-xs font-normal text-gray-500" data-translate="room_night">/ malam</span></span>
+                        </div>
+                        <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="bg-sage hover:bg-sage-dark text-white px-6 py-3 rounded-xl font-semibold text-sm transition" data-translate="room_btn">
+                            Pesan Kamar
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Facilities Section -->
+    <section id="facilities" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-sage font-semibold uppercase tracking-wider text-sm" data-translate="fac_subtitle">Fasilitas Unggulan</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4" data-translate="fac_title">Kenyamanan Selama Menginap</h2>
+                <p class="text-gray-600" data-translate="fac_desc">Nikmati berbagai fasilitas esensial yang kami sediakan untuk melengkapi liburan Anda di Ubud.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div class="bg-warmgray p-8 rounded-2xl text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-sage/10 text-sage rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-wifi"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-translate="fac_1_title">Free Wi-Fi</h3>
+                    <p class="text-gray-600 text-sm" data-translate="fac_1_desc">Tetap terhubung dengan internet berkecepatan tinggi di seluruh area homestay secara gratis.</p>
+                </div>
+                <div class="bg-warmgray p-8 rounded-2xl text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-sage/10 text-sage rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-mug-hot"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-translate="fac_2_title">Free Breakfast</h3>
+                    <p class="text-gray-600 text-sm" data-translate="fac_2_desc">Nikmati sarapan rumahan yang lezat setiap pagi, termasuk pancake buatan sendiri yang menjadi favorit tamu.</p>
+                </div>
+                <div class="bg-warmgray p-8 rounded-2xl text-center hover:shadow-md transition">
+                    <div class="w-16 h-16 bg-sage/10 text-sage rounded-2xl flex items-center justify-center text-2xl mx-auto mb-6">
+                        <i class="fa-solid fa-child-reaching"></i>
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-900 mb-3" data-translate="fac_3_title">Kid-friendly</h3>
+                    <p class="text-gray-600 text-sm" data-translate="fac_3_desc">Lingkungan yang aman, ramah keluarga, dan anak-anak sehingga liburan Anda terasa tenang dan nyaman.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   <!-- Reviews Section -->
+    <section id="reviews" class="py-24 bg-warmgray overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-sage font-semibold uppercase tracking-wider text-sm" data-translate="rev_subtitle">Ulasan Pengunjung</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4" data-translate="rev_title">Apa Kata Mereka Tentang Kami?</h2>
+                <div class="flex justify-center items-center gap-1 text-amber-400 text-lg mb-2">
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="text-gray-600 text-sm mb-6" data-translate="rev_source">Berdasarkan lebih dari 80 ulasan autentik dari Google Reviews</p>
+                
+                <!-- Tombol ke Google Reviews -->
+                <a href="https://share.google/Mq15y8fDqP7kLcfhu" target="_blank" class="inline-flex items-center gap-2 bg-white hover:bg-gray-50 text-gray-800 border border-gray-200 px-6 py-2.5 rounded-full font-semibold text-sm shadow-sm transition transform hover:-translate-y-0.5">
+                    <i class="fa-brands fa-google text-red-500"></i> <span data-translate="rev_btn_google">Lihat Semua Ulasan di Google (80+ Reviews)</span>
+                </a>
+            </div>
+
+            <!-- Carousel Wrapper dengan Tombol Geser -->
+            <div class="relative">
+                <!-- Tombol Navigasi Kiri / Kanan -->
+                <div class="flex justify-end gap-2 mb-4">
+                    <button onclick="scrollReviews('left')" class="w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-700 flex items-center justify-center hover:bg-sage hover:text-white hover:border-sage transition shadow-sm">
+                        <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                    <button onclick="scrollReviews('right')" class="w-10 h-10 rounded-full bg-white border border-gray-200 text-gray-700 flex items-center justify-center hover:bg-sage hover:text-white hover:border-sage transition shadow-sm">
+                        <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                </div>
+
+                <!-- Container Scroll Horizontal -->
+                <div id="reviews-container" class="flex gap-6 overflow-x-auto pb-6 pt-2 scrollbar-hide snap-x snap-mandatory scroll-smooth" style="scrollbar-width: none; -ms-overflow-style: none;">
+                    
+                    <!-- Review 1 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The breakfast is delicious, homemade; Not too filling but good for the price. The owner was extremely welcoming and made sure we had everything we needed during our stay in Ubud."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">A</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Amanda S.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 2 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Nice place, friendly owner, tasty pancakes! Location is tucked away just enough to escape the loud street noise of central Ubud, yet close enough to walk everywhere easily."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">M</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Michael R.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 3 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The room had a private bathroom, a large shower, and a comfortable bed. Everything was exceptionally clean, and the sheets smelled fresh. Highly recommended for backpackers or couples!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">S</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Sarah L.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 4 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "An absolute hidden gem in Ubud! The family running this homestay treats you like their own. Peaceful courtyard atmosphere and phenomenal value for money."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">D</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">David K.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 5 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Super clean rooms with strong hot water pressure in the large shower. Enjoyed sitting outside on the veranda listening to nature while eating the homemade banana pancake."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">E</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Emma W.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 6 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Great location on Jl. Sri Wedari. Close to great cafes, yoga studios, and the Ubud Monkey Forest. The owner gave us fantastic local tips for exploring."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">J</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Julian P.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 7 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Simple, authentic, and cozy. If you want to experience real Balinese family hospitality rather than a sterile hotel chain, Dekwah Homestay is the place to be."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">C</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Chloe T.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 8 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The Wi-Fi was fast and reliable, which allowed me to work remotely without any issues. Bed was super comfy and the room stays nice and cool at night."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">B</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Benjamin H.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 9 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Wonderful hospitality! They accommodated our early check-in request with a smile. The morning breakfast coffee and fresh fruit were a lovely touch."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">L</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Lucas M.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 10 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Unbeatable price for such a prime location in Ubud. The room was spacious, private bathroom was spotless, and the surroundings felt very safe and secure."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">K</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Katie B.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 11 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The pancakes served for breakfast are legendary among travelers here! Crispy on the edges, soft inside, served with fresh tropical fruit. Will definitely come back."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">T</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Tomás V.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 12 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Quiet at night, comfortable mattress, and excellent water pressure. Perfect sanctuary to unwind after a long day of temple touring and hiking."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">N</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Nina G.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 13 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The family made us feel like family. They helped arrange scooter rentals and gave great recommendations on where to eat local food nearby."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">O</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Oliver D.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 14 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Immaculate cleanliness across the property. The private bathroom feels modern and well-maintained. Exceptional quality considering the budget price."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">Z</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Zoe K.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 15 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Such a cozy and relaxing vibe. Sitting on the porch in the morning with hot tea and homemade breakfast is something I will miss dearly."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">H</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Hannah P.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 16 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The location on Jl. Sri Wedari is very convenient. You can walk to the palace or market within 10-15 minutes while enjoying traditional shops along the way."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">R</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Ryan T.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 17 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Friendly owner, quiet rooms, excellent homemade breakfast. Everything exceeded our expectations. Will definitely stay here again on our next trip to Bali."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">F</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Fiona C.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 18 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Wonderful peaceful atmosphere. The room was cozy with a comfortable double bed and good lighting. Perfect spot for solo travelers or couples."
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">K</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Kevin W.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 19 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "The breakfast pancake is delicious and made fresh on order. Owner is super nice and always greets you with a warm smile. Highly recommended!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">L</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Laura M.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Review 20 -->
+                    <div class="min-w-[320px] sm:min-w-[380px] max-w-[380px] snap-start bg-white p-8 rounded-2xl shadow-sm border border-gray-100 flex flex-col justify-between">
+                        <div>
+                            <div class="flex items-center gap-1 text-amber-400 text-sm mb-4">
+                                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+                            </div>
+                            <p class="text-gray-700 italic text-sm mb-6 leading-relaxed">
+                                "Top notch homestay experience in Ubud. Clean room, private bathroom with large shower, fast Wi-Fi, and lovely breakfast. Couldn't ask for more!"
+                            </p>
+                        </div>
+                        <div class="flex items-center gap-3 border-t border-gray-100 pt-4">
+                            <div class="w-10 h-10 bg-sage/20 text-sage rounded-full flex items-center font-bold justify-center text-sm">P</div>
+                            <div>
+                                <h4 class="font-bold text-sm text-gray-900">Paul S.</h4>
+                                <span class="text-xs text-gray-400" data-translate="rev_guest">Tamu Google</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Script untuk Tombol Geser Carousel Ulasan -->
+    <script>
+        function scrollReviews(direction) {
+            const container = document.getElementById('reviews-container');
+            const scrollAmount = 400; // Ukuran geser per klik
+            if (direction === 'left') {
+                container.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            } else {
+                container.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            }
+        }
+    </script>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center max-w-2xl mx-auto mb-16">
+                <span class="text-sage font-semibold uppercase tracking-wider text-sm" data-translate="gal_subtitle">Galeri Foto</span>
+                <h2 class="text-3xl sm:text-4xl font-bold text-gray-900 mt-2 mb-4" data-translate="gal_title">Suasana di Dekwah Homestay</h2>
+                <p class="text-gray-600" data-translate="gal_desc">Intip keindahan dan kenyamanan sudut-sudut homestay kami di Ubud.</p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero1.webp" alt="Gallery 1" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero3.webp" alt="Gallery 2" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero4.webp" alt="Gallery 3" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero2.webp" alt="Gallery 4" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero5.webp" alt="Gallery 5" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero6.webp" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                 <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero7.webp" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                 <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero8.webp" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+                 <div class="overflow-hidden rounded-2xl shadow-md h-64 group">
+                    <img src="asset/hero9.webp" alt="Gallery 6" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white pt-16 pb-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 mb-12">
+                <div>
+                    <h3 class="text-xl font-bold mb-4 flex items-center gap-2">
+                        <i class="fa-solid fa-house-chimney text-sage"></i> Dekwah Homestay
+                    </h3>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-translate="footer_desc">
+                        Tempat menginap terbaik di Ubud dengan suasana hangat, sarapan rumahan lezat, dan lokasi yang strategis untuk liburan Anda di Bali.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-base mb-4" data-translate="footer_contact">Kontak & Alamat</h4>
+                    <p class="text-gray-400 text-sm mb-3">
+                        <i class="fa-solid fa-location-dot text-sage mr-2"></i> No 18 Banjar Taman Kelod, Jl. Sri Wedari, Ubud, Kecamatan Ubud, Kabupaten Gianyar, Bali 80571
+                    </p>
+                    <p class="text-gray-400 text-sm">
+                        <i class="fa-solid fa-phone text-sage mr-2"></i> 0821-4408-4092
+                    </p>
+                </div>
+                <div>
+                    <h4 class="font-bold text-base mb-4" data-translate="footer_platforms">Platform Pemesanan</h4>
+                    <div class="flex flex-col space-y-2 text-sm text-gray-400">
+                        <a href="https://www.booking.com/Share-cK9Sth4" target="_blank" class="hover:text-sage transition">Booking.com</a>
+                        <a href="https://www.agoda.com/dekwah-homestay/hotel/all/bali-id.html?countryId=192&finalPriceView=1&isShowMobileAppPrice=false&cid=1917614&numberOfBedrooms=&familyMode=false&adults=2&children=0&rooms=1&maxRooms=0&checkIn=2026-10-5&isCalendarCallout=false&childAges=&numberOfGuest=0&missingChildAges=false&travellerType=1&showReviewSubmissionEntry=false&currencyCode=IDR&isFreeOccSearch=false&los=1&searchrequestid=1a5dff26-5e7c-4d81-8fa6-ba1cf4de602b&ds=EA6i02QOS1Ml1v5W" target="_blank" class="hover:text-sage transition">Agoda</a>
+                    </div>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 pt-8 text-center text-xs text-gray-500">
+                &copy; 2026 Dekwah Homestay. All rights reserved.
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Slider, Mobile Menu & Multi-language (Default EN) -->
+    <script>
+        // Translations Dictionary
+        const translations = {
+            en: {
+                nav_about: "About Us",
+                nav_rooms: "Rooms",
+                nav_facilities: "Facilities",
+                nav_reviews: "Rating",
+                nav_gallery: "Gallery",
+                btn_book: "Book Now",
+                hero_badge: "Ubud, Bali",
+                hero_title: "Welcome to Dekwah Homestay",
+                hero_desc: "Experience a peaceful stay in the heart of Ubud with delicious homemade breakfast and warm Balinese hospitality.",
+                hero_cta1: "Check Availability & Book",
+                hero_cta2: "About Us",
+                about_subtitle: "About Dekwah Homestay",
+                about_title: "Peace and Warmth of Home in the Heart of Ubud",
+                about_desc1: "Strategically located at No 18, Jl. Sri Wedari, Ubud, Bali, Dekwah Homestay offers peaceful accommodation close to the cultural and artistic center of Ubud. It is ideal for travelers seeking tranquility while exploring Bali.",
+                about_desc2: "We are known for exceptional owner hospitality, a clean environment, and delicious homemade breakfast—especially homemade pancakes praised by our guests. Each room is designed for maximum comfort with a private bathroom, large shower, and high-quality comfortable bed.",
+                about_platforms_title: "Find & Book Us On Your Preferred Platform:",
+                room_subtitle: "Comfortable Accommodation",
+                room_title: "Our Room Selection",
+                room_desc: "All rooms at Dekwah Homestay are designed uniformly with high comfort standards to ensure your rest is perfect.",
+                room_badge: "Free Breakfast",
+                room_name: "Double Room with Private Bathroom",
+                room_detail: "Spacious room with 1 comfortable double bed, private bathroom with large shower, free Wi-Fi, and daily homemade breakfast included.",
+                room_spec1: "1 Double Bed",
+                room_spec2: "Private Bathroom",
+                room_spec3: "Free Wi-Fi",
+                room_price_label: "Starts from",
+                room_night: "/ night",
+                room_btn: "Book Room",
+                fac_subtitle: "Top Facilities",
+                fac_title: "Comfort During Your Stay",
+                fac_desc: "Enjoy essential facilities provided to complete your holiday in Ubud.",
+                fac_1_title: "Free Wi-Fi",
+                fac_1_desc: "Stay connected with high-speed internet throughout the homestay area for free.",
+                fac_2_title: "Free Breakfast",
+                fac_2_desc: "Enjoy a delicious homemade breakfast every morning, featuring homemade pancakes loved by guests.",
+                fac_3_title: "Kid-friendly",
+                fac_3_desc: "A safe, family-friendly environment ensuring a calm and comfortable holiday.",
+                rev_subtitle: "Guest Reviews",
+                rev_title: "What They Say About Us",
+                rev_source: "Based on authentic reviews from Google Reviews",
+                rev_1: '"The breakfast is delicious, homemade; Not too filling but good for the price."',
+                rev_2: '"Nice place, friendly owner, tasty pancakes."',
+                rev_3: '"The room had a private bathroom, a large shower, and a comfortable bed."',
+                rev_guest: "Google Guest",
+                gal_subtitle: "Photo Gallery",
+                gal_title: "Atmosphere at Dekwah Homestay",
+                gal_desc: "Take a peek at the beauty and comfort of our homestay corners in Ubud.",
+                footer_desc: "The best place to stay in Ubud with a warm atmosphere, delicious homemade breakfast, and strategic location for your Bali holiday.",
+                footer_contact: "Contact & Address",
+                footer_platforms: "Booking Platforms"
+            },
+            id: {
+                nav_about: "About Us",
+                nav_rooms: "Kamar",
+                nav_facilities: "Fasilitas",
+                nav_reviews: "Rating",
+                nav_gallery: "Galeri",
+                btn_book: "Pesan Sekarang",
+                hero_badge: "Ubud, Bali",
+                hero_title: "Selamat Datang di Dekwah Homestay",
+                hero_desc: "Rasakan pengalaman menginap yang tenang di jantung Ubud dengan sarapan buatan rumah yang lezat dan keramahan pemilik khas Bali.",
+                hero_cta1: "Cek Ketersediaan & Pesan",
+                hero_cta2: "Tentang Kami",
+                about_subtitle: "Tentang Dekwah Homestay",
+                about_title: "Ketenangan dan Kehangatan Rumah di Jantung Ubud",
+                about_desc1: "Terletak strategis di No 18, Jl. Sri Wedari, Ubud, Bali, Dekwah Homestay menawarkan akomodasi yang tenang namun sangat dekat dengan pusat kebudayaan dan seni Ubud.",
+                about_desc2: "Kami dikenal berkat keramahan pemilik yang luar biasa, suasana homestay yang bersih, serta sajian sarapan rumahan yang lezat—terutama pancake buatan sendiri yang selalu dipuji oleh para tamu kami. Setiap kamar dirancang untuk memberikan kenyamanan maksimal.",
+                about_platforms_title: "Cari & Pesan Kami di Platform Pilihan Anda:",
+                room_subtitle: "Akomodasi Nyaman",
+                room_title: "Pilihan Kamar Kami",
+                room_desc: "Semua kamar di Dekwah Homestay dirancang seragam dengan standar kenyamanan tinggi untuk memastikan istirahat Anda sempurna.",
+                room_badge: "Free Breakfast",
+                room_name: "Double Room with Private Bathroom",
+                room_detail: "Kamar luas dengan 1 tempat tidur double yang nyaman, dilengkapi kamar mandi pribadi dengan shower besar, koneksi Wi-Fi gratis, dan sudah termasuk sarapan rumahan setiap pagi.",
+                room_spec1: "1 Double Bed",
+                room_spec2: "Private Bathroom",
+                room_spec3: "Free Wi-Fi",
+                room_price_label: "Mulai dari",
+                room_night: "/ malam",
+                room_btn: "Pesan Kamar",
+                fac_subtitle: "Fasilitas Unggulan",
+                fac_title: "Kenyamanan Selama Menginap",
+                fac_desc: "Nikmati berbagai fasilitas esensial yang kami sediakan untuk melengkapi liburan Anda di Ubud.",
+                fac_1_title: "Free Wi-Fi",
+                fac_1_desc: "Tetap terhubung dengan internet berkecepatan tinggi di seluruh area homestay secara gratis.",
+                fac_2_title: "Free Breakfast",
+                fac_2_desc: "Nikmati sarapan rumahan yang lezat setiap pagi, termasuk pancake buatan sendiri yang menjadi favorit tamu.",
+                fac_3_title: "Kid-friendly",
+                fac_3_desc: "Lingkungan yang aman, ramah keluarga, dan anak-anak sehingga liburan Anda terasa tenang dan nyaman.",
+                rev_subtitle: "Ulasan Pengunjung",
+                rev_title: "Apa Kata Mereka Tentang Kami?",
+                rev_source: "Berdasarkan ulasan asli dari Google Reviews",
+                rev_1: '"The breakfast is delicious, homemade; Not too filling but good for the price."',
+                rev_2: '"Nice place, friendly owner, tasty pancakes."',
+                rev_3: '"The room had a private bathroom, a large shower, and a comfortable bed."',
+                rev_guest: "Tamu Google",
+                gal_subtitle: "Galeri Foto",
+                gal_title: "Suasana di Dekwah Homestay",
+                gal_desc: "Intip keindahan dan kenyamanan sudut-sudut homestay kami di Ubud.",
+                footer_desc: "Tempat menginap terbaik di Ubud dengan suasana hangat, sarapan rumahan lezat, dan lokasi yang strategis untuk liburan Anda di Bali.",
+                footer_contact: "Kontak & Alamat",
+                footer_platforms: "Platform Pemesanan"
+            }
+        };
+
+        function switchLang(lang) {
+            document.documentElement.lang = lang;
+            
+            // Update buttons state
+            ['btn-en', 'm-btn-en'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.className = lang === 'en' ? 'px-3 py-1.5 rounded-full bg-sage text-white transition' : 'px-3 py-1.5 rounded-full text-gray-400 hover:text-white transition';
+                }
+            });
+            ['btn-id', 'm-btn-id'].forEach(id => {
+                const el = document.getElementById(id);
+                if(el) {
+                    el.className = lang === 'id' ? 'px-3 py-1.5 rounded-full bg-sage text-white transition' : 'px-3 py-1.5 rounded-full text-gray-400 hover:text-white transition';
+                }
+            });
+
+            // Apply translations
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(el => {
+                const key = el.getAttribute('data-translate');
+                if (translations[lang][key]) {
+                    el.innerHTML = translations[lang][key];
+                }
+            });
+        }
+
+        // Default language set to 'en' on first load
+        window.addEventListener('DOMContentLoaded', () => {
+            switchLang('en');
+        });
+
+        // Mobile Menu Toggle
+        const menuBtn = document.getElementById('menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        menuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Hero Auto Slider (3 seconds)
+        let slideIndex = 0;
+        const slides = document.querySelectorAll('.hero-slide');
+        const dots = document.querySelectorAll('.slider-dot');
+
+        function showSlides() {
+            slides.forEach((slide, index) => {
+                slide.style.opacity = index === slideIndex ? '1' : '0';
+            });
+            dots.forEach((dot, index) => {
+                dot.style.backgroundColor = index === slideIndex ? '#87A96B' : 'rgba(255, 255, 255, 0.5)';
+            });
+            slideIndex = (slideIndex + 1) % slides.length;
+        }
+
+        function currentSlide(n) {
+            slideIndex = n;
+            showSlides();
+        }
+
+        setInterval(showSlides, 3000);
+        showSlides();
+    </script>
+</body>
+</html>
